@@ -19,9 +19,8 @@ app.get('/', (req, res) => (console.log("hello world")))
 
 app.get('/users', async (req, res) =>{
     try {
-        const users = await pool.query('select * from users')
-        console.log(users.rows)
-        return users.rows
+        const { rows } = await pool.query('select * from users')
+        return res.status(200).send(rows)
     } catch (err) {
         return res.status(400),send(err)
     }
