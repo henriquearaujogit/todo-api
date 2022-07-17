@@ -24,12 +24,19 @@ app.get('/users', async (req, res) =>{
         const { rows } = await pool.query('select * from users')
         return res.status(200).send(rows)
     } catch (err) {
-        return res.status(400),send(err)
+        return res.status(400).send(err)
     }
 })
 
-
-
+app.post('/registration', async (req, res) =>{
+    const { username } = req.body
+    try {
+        const newUser = await pool.query('INSERT INTO users(user_name) VALUES ($1)', [username])
+        return res.status(200).send('user successful added', newUser)
+    } catch (error) {
+        return res.status(400).send(error)
+    }
+})
 
 app.listen(PORT, () => console.log('server running on port: ', PORT))
 
