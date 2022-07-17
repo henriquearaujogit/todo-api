@@ -1,17 +1,19 @@
 const express = require('express')
+const cors = require('cors')
 const { Pool } = require('pg')
 const { async } = require('rxjs')
 require('dotenv').config()
 
 const app = express()
 
-const PORT = 3333
+const PORT = process.env.PORT  || 3333
 
 const pool = new Pool({
     connectionString: process.env.POSTGRES_URL
 })
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => (console.log("hello world")))
 
