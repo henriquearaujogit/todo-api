@@ -15,7 +15,9 @@ const pool = new Pool({
 app.use(express.json())
 app.use(cors())
 
-app.get('/', (req, res) => (console.log("hello world")))
+app.get('/', (req, res) => {
+    return res.status(200).send("active")
+})
 
 app.get('/users', async (req, res) =>{
     try {
