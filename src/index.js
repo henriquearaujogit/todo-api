@@ -21,6 +21,7 @@ app.get('/users', async (req, res) =>{
     try {
         const users = await pool.query('select * from users')
         console.log(users.rows)
+        return users.rows
     } catch (err) {
         return res.status(400),send(err)
     }
